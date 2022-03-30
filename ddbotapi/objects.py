@@ -12,6 +12,9 @@ from .utils import *
 
 
 class User(JsonDeserializable):
+    """
+    This object represents a User Structure
+    """
     def __init__(self, uid, username, discriminator, avatar, bot, system, mfa_enabled, banner, accent_color, locale,
                  verified, email, flags, premium_type, public_flags):
         self.id = uid
@@ -47,13 +50,13 @@ class User(JsonDeserializable):
             avatar = obj['avatar']
         bot = False
         if 'bot' in obj:
-            bot = True # bot = obj['bot']
+            bot = True  # bot = obj['bot']
         system = False
         if 'system' in obj:
-            system = True # system = obj['system']
+            system = True  # system = obj['system']
         mfa_enabled = False
         if 'mfa_enabled' in obj:
-            mfa_enabled = True # mfa_enabled = obj['mfa_enabled']
+            mfa_enabled = True  # mfa_enabled = obj['mfa_enabled']
         banner = None
         if 'banner' in obj:
             banner = obj['banner']
@@ -65,7 +68,7 @@ class User(JsonDeserializable):
             locale = obj['locale']
         verified = False
         if 'verified' in obj:
-            verified = True # verified = obj['verified']
+            verified = True  # verified = obj['verified']
         email = None
         if 'email' in obj:
             email = obj['email']
@@ -80,3 +83,51 @@ class User(JsonDeserializable):
             public_flags = obj['public_flags']
         return cls(uid, username, discriminator, avatar, bot, system, mfa_enabled, banner, accent_color, locale,
                    verified, email, flags, premium_type, public_flags)
+
+
+class Connection(JsonDeserializable):
+    """
+    This object represents user has attached
+    """
+    def __init__(self, uid, name, ttype, revoked, integration, verified, friend_sync, show_activity, visibility):
+        self.id = uid
+        self.name = name
+        self.type = ttype
+        self.revoked = revoked
+        self.integration = integration
+        self.verified = verified
+        self.friend_sync = friend_sync
+        self.show_activity = show_activity
+        self.visibility = visibility
+
+    @classmethod
+    def de_json(cls, obj_type):
+        obj = cls.check_type(obj_type)
+        uid = None
+        if 'id' in obj:
+            uid = obj['id']
+        name = None
+        if 'name' in obj:
+            name = obj['name']
+        ttype = None
+        if 'type' in obj:
+            ttype = obj['type']
+        revoked = False
+        if 'revoked' in obj:
+            revoked = True
+        integrations = None
+        if 'integrations' in obj:
+            integrations = obj['integrations']
+        verified = False
+        if 'verified' in obj:
+            verified = True
+        friend_sync = False
+        if 'friend_sync' in obj:
+            friend_sync = True
+        show_activity = False
+        if 'show_activity' in obj:
+            show_activity = True
+        visibility = None
+        if 'visibility' in obj:
+            visibility = obj['visibility']
+        return cls(uid, name, ttype, revoked, integrations, verified, friend_sync, show_activity, visibility)
