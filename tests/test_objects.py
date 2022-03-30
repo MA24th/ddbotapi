@@ -2,6 +2,51 @@ import unittest
 from ddbotapi.objects import *
 
 
+class TestApplication(unittest.TestCase):
+    with open('schema/Application.json') as f:
+        data = f.read()
+
+    object = Application.de_json(data)
+
+    def test_application(self):
+        app = self.object
+        self.assertEqual(app.id, '172150183260323840')
+        self.assertEqual(app.name, 'Baba O-Riley')
+        self.assertEqual(app.icon, None)
+        self.assertEqual(app.description, 'Test')
+        self.assertEqual(app.rpc_origins, None)
+        self.assertEqual(app.bot_public, True)
+        self.assertEqual(app.bot_require_code_grant, False)
+        self.assertEqual(app.terms_of_service_url, None)
+        self.assertEqual(app.privacy_policy_url, None)
+        # app.owner -> test_app_owner()
+        self.assertEqual(app.summary, 'This is a game')
+        self.assertEqual(app.verify_key, '1e0a356058d627ca38a5c8c9648818061d49e49bd9da9e3ab17d98ad4d6bg2u8')
+        # app.team -> test_app_team()
+        self.assertEqual(app.guild_id, '290926798626357260')
+        self.assertEqual(app.primary_sku_id, '172150183260323840')
+        self.assertEqual(app.slug, 'test')
+        self.assertEqual(app.cover_image, '31deabb7e45b6c8ecfef77d2f99c81a5')
+        self.assertEqual(app.flags, None)
+
+    def test_app_owner(self):
+        user = self.object.owner
+        self.assertEqual(user.id, '172150183260323840')
+        self.assertEqual(user.username, 'i own a bot')
+        self.assertEqual(user.discriminator, '1738')
+        self.assertEqual(user.avatar, None)
+        self.assertEqual(user.bot, False)
+        self.assertEqual(user.system, False)
+        self.assertEqual(user.mfa_enabled, False)
+        self.assertEqual(user.banner, None)
+        self.assertEqual(user.accent_color, None)
+        self.assertEqual(user.locale, None)
+        self.assertEqual(user.verified, False)
+        self.assertEqual(user.email, None)
+        self.assertEqual(user.flags, 1024)
+        self.assertEqual(user.premium_type, None)
+        self.assertEqual(user.public_flags, None)
+
 class TestUser(unittest.TestCase):
     with open('schema/User.json') as f:
         data = f.read()
