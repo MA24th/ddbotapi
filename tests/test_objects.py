@@ -25,3 +25,22 @@ class TestUser(unittest.TestCase):
         self.assertEqual(user.flags, 64)
         self.assertEqual(user.premium_type, 1)
         self.assertEqual(user.public_flags, 64)
+
+
+class TestConnection(unittest.TestCase):
+    with open('schema/Connection.json') as f:
+        data = f.read()
+
+    object = Connection.de_json(data)
+
+    def test_connection(self):
+        connection = self.object
+        self.assertEqual(connection.id, '80351110224678912')
+        self.assertEqual(connection.name, 'Nelly')
+        self.assertEqual(connection.type, '1337')
+        self.assertEqual(connection.revoked, True)
+        self.assertEqual(connection.integration, [])
+        self.assertEqual(connection.verified, True)
+        self.assertEqual(connection.friend_sync, True)
+        self.assertEqual(connection.show_activity, True)
+        self.assertEqual(connection.visibility, 1)
