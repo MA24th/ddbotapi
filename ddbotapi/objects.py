@@ -11,10 +11,99 @@ that are also useful for external consumption.
 from .utils import *
 
 
+class Application(JsonDeserializable):
+    """
+    This object represents an Application Structure
+    """
+    def __init__(self, uid, name, icon, description, rpc_origins, bot_public, bot_require_code_grant,
+                 terms_of_service_url, privacy_policy_url, owner, summary, verify_key, team, guild_id, primary_sku_id,
+                 slug, cover_image, flags):
+        self.id = uid
+        self.name = name
+        self.icon = icon
+        self.description = description
+        self.rpc_origins = rpc_origins
+        self.bot_public = bot_public
+        self.bot_require_code_grant = bot_require_code_grant
+        self.terms_of_service_url = terms_of_service_url
+        self.privacy_policy_url = privacy_policy_url
+        self.owner = owner
+        self.summary = summary
+        self.verify_key = verify_key
+        self.team = team
+        self.guild_id = guild_id
+        self.primary_sku_id = primary_sku_id
+        self.slug = slug
+        self.cover_image = cover_image
+        self.flags = flags
+
+    @classmethod
+    def de_json(cls, obj_type):
+        obj = cls.check_type(obj_type)
+        uid = None
+        if 'id' in obj:
+            uid = obj['id']
+        name = None
+        if 'name' in obj:
+            name = obj['name']
+        icon = None
+        if 'icon' in obj:
+            icon = obj['icon']
+        description = None
+        if 'description' in obj:
+            description = obj['description']
+        rpc_origins = None
+        if 'rpc_origins' in obj:
+            rpc_origins = obj['rpc_origins']
+        bot_public = False
+        if 'bot_public' in obj:
+            bot_public = obj['bot_public']
+        bot_require_code_grant = None
+        if 'bot_require_code_grant' in obj:
+            bot_require_code_grant = obj['bot_require_code_grant']
+        terms_of_service_url = None
+        if 'terms_of_service_url' in obj:
+            terms_of_service_url = obj['terms_of_service_url']
+        privacy_policy_url = None
+        if 'privacy_policy_url' in obj:
+            privacy_policy_url = obj['privacy_policy_url']
+        owner = None
+        if 'owner' in obj:
+            owner = User.de_json(obj['owner'])
+        summary = None
+        if 'summary' in obj:
+            summary = obj['summary']
+        verify_key = None
+        if 'verify_key' in obj:
+            verify_key = obj['verify_key']
+        team = None
+        if 'team' in obj:
+            team = obj['team']
+        guild_id = None
+        if 'guild_id' in obj:
+            guild_id = obj['guild_id']
+        primary_sku_id = None
+        if 'primary_sku_id' in obj:
+            primary_sku_id = obj['primary_sku_id']
+        slug = None
+        if 'slug' in obj:
+            slug = obj['slug']
+        cover_image = None
+        if 'cover_image' in obj:
+            cover_image = obj['cover_image']
+        flags = None
+        if 'flags' in obj:
+            flags = obj['flags']
+        return cls(uid, name, icon, description, rpc_origins, bot_public, bot_require_code_grant, terms_of_service_url,
+                   privacy_policy_url, owner, summary, verify_key, team, guild_id, primary_sku_id, slug, cover_image,
+                   flags)
+
+
 class User(JsonDeserializable):
     """
     This object represents a User Structure
     """
+
     def __init__(self, uid, username, discriminator, avatar, bot, system, mfa_enabled, banner, accent_color, locale,
                  verified, email, flags, premium_type, public_flags):
         self.id = uid
@@ -89,6 +178,7 @@ class Connection(JsonDeserializable):
     """
     This object represents user has attached
     """
+
     def __init__(self, uid, name, ttype, revoked, integration, verified, friend_sync, show_activity, visibility):
         self.id = uid
         self.name = name
