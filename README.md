@@ -3,7 +3,7 @@ Discord Bot API Framework
 
 [![GPLv2 license](https://img.shields.io/badge/LICENSE-GPLv2-red)](https://github.com/ma24th/ddbotapi/blob/master/LICENSE)
 [![PyPI](https://img.shields.io/badge/PyPI-v9.0.0-yellow.svg)](https://pypi.org/project/ddbotapi/)
-[![Test Python Package](https://github.com/MA24th/ddbotapi/workflows/Python%20package/badge.svg)]()
+[![Python package](https://github.com/MA24th/ddbotapi/actions/workflows/python-package.yml/badge.svg)](https://github.com/MA24th/ddbotapi/actions/workflows/python-package.yml)
 [![Discord Server](https://img.shields.io/badge/Discord-Server-blue.svg)](https://discord.gg/g65AqbPK6g)
 
 
