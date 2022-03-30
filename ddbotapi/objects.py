@@ -45,15 +45,15 @@ class User(JsonDeserializable):
         avatar = None
         if 'avatar' in obj:
             avatar = obj['avatar']
-        bot = None
+        bot = False
         if 'bot' in obj:
-            bot = obj['bot']
-        system = None
+            bot = True # bot = obj['bot']
+        system = False
         if 'system' in obj:
-            system = obj['system']
-        mfa_enabled = None
+            system = True # system = obj['system']
+        mfa_enabled = False
         if 'mfa_enabled' in obj:
-            mfa_enabled = obj['mfa_enabled']
+            mfa_enabled = True # mfa_enabled = obj['mfa_enabled']
         banner = None
         if 'banner' in obj:
             banner = obj['banner']
@@ -63,9 +63,9 @@ class User(JsonDeserializable):
         locale = None
         if 'locale' in obj:
             locale = obj['locale']
-        verified = None
+        verified = False
         if 'verified' in obj:
-            verified = obj['verified']
+            verified = True # verified = obj['verified']
         email = None
         if 'email' in obj:
             email = obj['email']
