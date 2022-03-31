@@ -18,23 +18,32 @@
   "slug": "test",
   "summary": "This is a game",
   "team": {
-    "icon": "dd9b7dcfdf5351b9c3de0fe167bacbe1",
-    "id": "531992624043786253",
+    "icon": "string",
+    "id": "string",
     "members": [
       {
         "membership_state": 2,
         "permissions": [
           "*"
         ],
-        "team_id": "531992624043786253",
+        "team_id": "string",
         "user": {
-          "avatar": "d9e261cd35999608eb7e3de1fae3688b",
-          "discriminator": "0001",
-          "id": "511972282709709995",
-          "username": "Mr Owner"
+          "id": "80351110224678912",
+          "username": "Nelly",
+          "discriminator": "1337",
+          "avatar": "8342729096ea3675442027381ff50dfe",
+          "verified": true,
+          "email": "nelly@discord.com",
+          "flags": 64,
+          "banner": "06c16474723fe537c283b8efa61a30c8",
+          "accent_color": 16711680,
+          "premium_type": 1,
+          "public_flags": 64
         }
       }
-    ]
+    ],
+    "name": "string",
+    "owner_user_id": "string"
   },
   "verify_key": "1e0a356058d627ca38a5c8c9648818061d49e49bd9da9e3ab17d98ad4d6bg2u8"
 }

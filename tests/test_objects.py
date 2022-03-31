@@ -8,7 +8,7 @@ class TestApplication(unittest.TestCase):
 
     object = Application.de_json(data)
 
-    def test_application(self):
+    def test_app(self):
         app = self.object
         self.assertEqual(app.id, '172150183260323840')
         self.assertEqual(app.name, 'Baba O-Riley')
@@ -46,6 +46,40 @@ class TestApplication(unittest.TestCase):
         self.assertEqual(user.flags, 1024)
         self.assertEqual(user.premium_type, None)
         self.assertEqual(user.public_flags, None)
+
+    def test_app_team(self):
+        team = self.object.team
+        self.assertEqual(team.icon, 'string')
+        self.assertEqual(team.id, 'string')
+        # team.members -> test_team_members()
+        self.assertEqual(team.name, 'string')
+        self.assertEqual(team.owner_user_id, 'string')
+
+    def test_app_team_members(self):
+        member = self.object.team.members[0]
+        self.assertEqual(member.membership_state, 'ACCEPTED')
+        self.assertEqual(member.permissions[0], '*')
+        self.assertEqual(member.team_id, 'string')
+        # member.user -> test_member_user()
+
+    def test_app_member_user(self):
+        user = self.object.team.members[0].user
+        self.assertEqual(user.id, '80351110224678912')
+        self.assertEqual(user.username, 'Nelly')
+        self.assertEqual(user.discriminator, '1337')
+        self.assertEqual(user.avatar, '8342729096ea3675442027381ff50dfe')
+        self.assertEqual(user.bot, False)
+        self.assertEqual(user.system, False)
+        self.assertEqual(user.mfa_enabled, False)
+        self.assertEqual(user.banner, '06c16474723fe537c283b8efa61a30c8')
+        self.assertEqual(user.accent_color, 16711680)
+        self.assertEqual(user.locale, None)
+        self.assertEqual(user.verified, True)
+        self.assertEqual(user.email, 'nelly@discord.com')
+        self.assertEqual(user.flags, 64)
+        self.assertEqual(user.premium_type, 1)
+        self.assertEqual(user.public_flags, 64)
+
 
 class TestUser(unittest.TestCase):
     with open('schema/User.json') as f:
@@ -89,3 +123,75 @@ class TestConnection(unittest.TestCase):
         self.assertEqual(connection.friend_sync, True)
         self.assertEqual(connection.show_activity, True)
         self.assertEqual(connection.visibility, 1)
+
+
+class TestTeam(unittest.TestCase):
+    with open('schema/Team.json') as f:
+        data = f.read()
+
+    object = Team.de_json(data)
+
+    def test_team(self):
+        team = self.object
+        self.assertEqual(team.icon, 'string')
+        self.assertEqual(team.id, 'string')
+        # team.members -> test_team_members()
+        self.assertEqual(team.name, 'string')
+        self.assertEqual(team.owner_user_id, 'string')
+
+    def test_team_members(self):
+        member = self.object.members[0]
+        self.assertEqual(member.membership_state, 'ACCEPTED')
+        self.assertEqual(member.permissions[0], '*')
+        self.assertEqual(member.team_id, 'string')
+        # member.user -> test_member_user()
+
+    def test_member_user(self):
+        user = self.object.members[0].user
+        self.assertEqual(user.id, '80351110224678912')
+        self.assertEqual(user.username, 'Nelly')
+        self.assertEqual(user.discriminator, '1337')
+        self.assertEqual(user.avatar, '8342729096ea3675442027381ff50dfe')
+        self.assertEqual(user.bot, False)
+        self.assertEqual(user.system, False)
+        self.assertEqual(user.mfa_enabled, False)
+        self.assertEqual(user.banner, '06c16474723fe537c283b8efa61a30c8')
+        self.assertEqual(user.accent_color, 16711680)
+        self.assertEqual(user.locale, None)
+        self.assertEqual(user.verified, True)
+        self.assertEqual(user.email, 'nelly@discord.com')
+        self.assertEqual(user.flags, 64)
+        self.assertEqual(user.premium_type, 1)
+        self.assertEqual(user.public_flags, 64)
+
+
+class TestTeamMember(unittest.TestCase):
+    with open('schema/TeamMember.json') as f:
+        data = f.read()
+
+    object = TeamMember.de_json(data)
+
+    def test_team_member(self):
+        member = self.object
+        self.assertEqual(member.membership_state, 'ACCEPTED')
+        self.assertEqual(member.permissions[0], '*')
+        self.assertEqual(member.team_id, 'string')
+        # member.user -> test_member_user()
+
+    def test_member_user(self):
+        user = self.object.user
+        self.assertEqual(user.id, '80351110224678912')
+        self.assertEqual(user.username, 'Nelly')
+        self.assertEqual(user.discriminator, '1337')
+        self.assertEqual(user.avatar, '8342729096ea3675442027381ff50dfe')
+        self.assertEqual(user.bot, False)
+        self.assertEqual(user.system, False)
+        self.assertEqual(user.mfa_enabled, False)
+        self.assertEqual(user.banner, '06c16474723fe537c283b8efa61a30c8')
+        self.assertEqual(user.accent_color, 16711680)
+        self.assertEqual(user.locale, None)
+        self.assertEqual(user.verified, True)
+        self.assertEqual(user.email, 'nelly@discord.com')
+        self.assertEqual(user.flags, 64)
+        self.assertEqual(user.premium_type, 1)
+        self.assertEqual(user.public_flags, 64)
