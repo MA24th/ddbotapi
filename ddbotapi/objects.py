@@ -15,6 +15,7 @@ class Application(JsonDeserializable):
     """
     This object represents an Application Structure
     """
+
     def __init__(self, uid, name, icon, description, rpc_origins, bot_public, bot_require_code_grant,
                  terms_of_service_url, privacy_policy_url, owner, summary, verify_key, team, guild_id, primary_sku_id,
                  slug, cover_image, flags):
@@ -78,7 +79,7 @@ class Application(JsonDeserializable):
             verify_key = obj['verify_key']
         team = None
         if 'team' in obj:
-            team = obj['team']
+            team = Team.de_json(obj['team'])
         guild_id = None
         if 'guild_id' in obj:
             guild_id = obj['guild_id']
@@ -221,3 +222,75 @@ class Connection(JsonDeserializable):
         if 'visibility' in obj:
             visibility = obj['visibility']
         return cls(uid, name, ttype, revoked, integrations, verified, friend_sync, show_activity, visibility)
+
+
+class Team(JsonDeserializable):
+    """
+    This object represents a Team Structure
+    """
+
+    def __init__(self, icon, uid, members, name, owner_user_id):
+        self.icon = icon
+        self.id = uid
+        self.members = members
+        self.name = name
+        self.owner_user_id = owner_user_id
+
+    @classmethod
+    def de_json(cls, obj_type):
+        obj = cls.check_type(obj_type)
+        icon = None
+        if 'icon' in obj:
+            icon = obj['icon']
+        uid = None
+        if 'id' in obj:
+            uid = obj['id']
+        members = None
+        if 'members' in obj:
+            members = Team.parse_members(obj['members'])
+        name = None
+        if 'name' in obj:
+            name = obj['name']
+        owner_user_id = None
+        if 'owner_user_id' in obj:
+            owner_user_id = obj['owner_user_id']
+        return cls(icon, uid, members, name, owner_user_id)
+
+    @staticmethod
+    def parse_members(lst):
+        members = []
+        for x in lst:
+            members.append(TeamMember.de_json(x))
+        return members
+
+
+class TeamMember(JsonDeserializable):
+    """
+    This object represents Team Member Structure
+    """
+    def __init__(self, membership_state, permissions, team_id, user):
+        self.membership_state = membership_state
+        self.permissions = permissions
+        self.team_id = team_id
+        self.user = user
+
+    @classmethod
+    def de_json(cls, obj_type):
+        obj = cls.check_type(obj_type)
+        membership_state = None
+        if 'membership_state' in obj:
+            membership_state = obj['membership_state']
+            if membership_state == 1:
+                membership_state = 'INVITED'
+            elif membership_state == 2:
+                membership_state = 'ACCEPTED'
+        permissions = None
+        if 'permissions' in obj:
+            permissions = obj['permissions']
+        team_id = None
+        if 'team_id' in obj:
+            team_id = obj['team_id']
+        user = None
+        if 'user' in obj:
+            user = User.de_json(obj['user'])
+        return cls(membership_state, permissions, team_id, user)
